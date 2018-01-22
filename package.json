@@ -1,0 +1,72 @@
+{
+  "title": "Procedural Badlands",
+  "name": "procedural-badlands",
+  "version": "1.0.0",
+  "description": "Procedurally generated terrain",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo -H 0.0.0.0 src/js/main.js:js/bundle.js --live",
+    "build": "browserify -o js/bundle.js src/js/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhupendra-bhudia/procedural-badlands.git"
+  },
+  "keywords": [
+    "procedural",
+    "generated",
+    "terrain",
+    "art",
+    "perlin",
+    "noise",
+    "regl",
+    "glsl",
+    "computer"
+  ],
+  "author": "Bhupendra Bhudia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bhupendra-bhudia/procedural-badlands/issues"
+  },
+  "homepage": "https://github.com/bhupendra-bhudia/procedural-badlands",
+  "dependencies": {
+    "alea": "0.0.9",
+    "babel-plugin-transform-async-to-generator": "^6.22.0",
+    "babelify": "^7.3.0",
+    "budo": "^9.4.7",
+    "filesaver.js": "^0.2.0",
+    "gl-matrix": "^2.3.2",
+    "glsl-atmosphere": "^2.0.0",
+    "glslify": "^6.0.2",
+    "regl": "^1.3.0",
+    "sprintf": "^0.1.5"
+  },
+  "devDependencies": {
+    "browserify": "^15.2.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-eslint": "^4.0.1",
+    "gulp-header": "^2.0.1",
+    "gulp-notify": "^3.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "require-directory": "^2.1.1",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^3.9.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "plugins": [
+            "transform-async-to-generator"
+          ]
+        }
+      ],
+      "glslify"
+    ]
+  }
+}

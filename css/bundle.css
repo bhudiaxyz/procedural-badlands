@@ -1,0 +1,50 @@
+/*!
+ * Procedural Badlands - Procedurally generated terrain (procedural-badlands v1.0.0 - https://github.com/bhupendra-bhudia/procedural-badlands)
+ *
+ * Licensed under MIT (https://github.com/bhupendra-bhudia/procedural-badlands/blob/master/LICENSE)
+ *
+ * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
+ */
+body {
+  margin: 0px;
+  background: grey; }
+
+#render-canvas {
+  position: fixed; }
+
+#status {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #EEE;
+  font-size: 24px;
+  z-index: 100;
+  text-align: center; }
+
+#controls {
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  line-height: 1px;
+  font-size: 32px;
+  color: white;
+  background: rgba(0, 0, 0, 0.25);
+  cursor: hand;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-decoration: none; }
+
+#next {
+  color: white;
+  text-decoration: none; }
+
+#download {
+  color: white;
+  text-decoration: none; }
