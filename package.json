@@ -31,14 +31,14 @@
   "homepage": "https://github.com/bhudiaxyz/procedural-badlands",
   "dependencies": {
     "alea": "0.0.9",
-    "babel-plugin-transform-async-to-generator": "^6.22.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babelify": "^7.3.0",
     "budo": "^9.4.7",
     "filesaver.js": "^0.2.0",
-    "gl-matrix": "^2.3.2",
+    "gl-matrix": "^2.4.0",
     "glsl-atmosphere": "^2.0.0",
-    "glslify": "^6.0.2",
-    "regl": "^1.3.0",
+    "glslify": "^6.1.0",
+    "regl": "^1.3.1",
     "sprintf": "^0.1.5"
   },
   "devDependencies": {
