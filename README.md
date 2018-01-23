@@ -1,5 +1,5 @@
 # procedural-badlands
-Procedural generated terrain rendering. Go to the [demo](https://bhupendra-bhudia.github.io/procedural-badlands/).
+Procedural generated terrain rendering. Go to the [demo](https://bhudiaxyz.github.io/procedural-badlands/).
 
 All code and everything you make with it is completely free in every way. No, you are not required to credit me. Enjoy!
 

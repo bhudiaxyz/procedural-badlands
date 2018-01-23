@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bhupendra-bhudia/procedural-badlands.git"
+    "url": "git+https://github.com/bhudiaxyz/procedural-badlands.git"
   },
   "keywords": [
     "procedural",
@@ -26,9 +26,9 @@
   "author": "Bhupendra Bhudia",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bhupendra-bhudia/procedural-badlands/issues"
+    "url": "https://github.com/bhudiaxyz/procedural-badlands/issues"
   },
-  "homepage": "https://github.com/bhupendra-bhudia/procedural-badlands",
+  "homepage": "https://github.com/bhudiaxyz/procedural-badlands",
   "dependencies": {
     "alea": "0.0.9",
     "babel-plugin-transform-async-to-generator": "^6.22.0",

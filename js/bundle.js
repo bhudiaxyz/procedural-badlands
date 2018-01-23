@@ -1,7 +1,7 @@
 /*!
- * Procedural Badlands - Procedurally generated terrain (procedural-badlands v1.0.0 - https://github.com/bhupendra-bhudia/procedural-badlands)
+ * Procedural Badlands - Procedurally generated terrain (procedural-badlands v1.0.0 - https://github.com/bhudiaxyz/procedural-badlands)
  *
- * Licensed under MIT (https://github.com/bhupendra-bhudia/procedural-badlands/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/bhudiaxyz/procedural-badlands/blob/master/LICENSE)
  *
  * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
  */
@@ -71,7 +71,7 @@
         return random() * 0x100000000; // 2^32
       };
       random.fract53 = function() {
-        return random() + 
+        return random() +
           (random() * 0x200000 | 0) * 1.1102230246251565e-16; // 2^-53
       };
       random.version = 'Alea 0.9';
@@ -87,7 +87,7 @@
         s2 = +i[2] || 0;
         c = +i[3] || 0;
       };
- 
+
       return random;
 
     } (Array.prototype.slice.call(arguments)));
@@ -16880,20 +16880,20 @@ var sprintf = (function() {
 
 	// convert object to simple one line string without indentation or
 	// newlines. Note that this implementation does not print array
-	// values to their actual place for sparse arrays. 
+	// values to their actual place for sparse arrays.
 	//
 	// For example sparse array like this
 	//    l = []
 	//    l[4] = 1
 	// Would be printed as "[1]" instead of "[, , , , 1]"
-	// 
-	// If argument 'seen' is not null and array the function will check for 
+	//
+	// If argument 'seen' is not null and array the function will check for
 	// circular object references from argument.
 	str_format.object_stringify = function(obj, depth, maxdepth, seen) {
 		var str = '';
 		if (obj != null) {
 			switch( typeof(obj) ) {
-			case 'function': 
+			case 'function':
 				return '[Function' + (obj.name ? ': '+obj.name : '') + ']';
 			    break;
 			case 'object':
@@ -16917,17 +16917,17 @@ var sprintf = (function() {
 				} else { // object
 					str += '{';
 					var arr = []
-					for (var k in obj) { 
+					for (var k in obj) {
 						if(obj.hasOwnProperty(k)) {
 							if (seen && seen.indexOf(obj[k]) >= 0) arr.push(k + ': [Circular]');
-							else arr.push(k +': ' +str_format.object_stringify(obj[k], depth+1, maxdepth, seen)); 
+							else arr.push(k +': ' +str_format.object_stringify(obj[k], depth+1, maxdepth, seen));
 						}
 					}
 					str += arr.join(', ') + '}';
 				}
 				return str;
 				break;
-			case 'string':				
+			case 'string':
 				return '"' + obj + '"';
 				break
 			}
@@ -17055,7 +17055,7 @@ sprintf.vsprintf = vsprintf;
 /*!
  * Procedural Badlands - Procedurally generated terrain.
  *
- * Licensed under MIT (https://github.com/bhupendra-bhudia/procedural-badlands/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/bhudiaxyz/procedural-badlands/blob/master/LICENSE)
  *
  * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
  */
@@ -17285,7 +17285,7 @@ module.exports = function (regl) {
 /*!
  * Procedural Badlands - Procedurally generated terrain.
  *
- * Licensed under MIT (https://github.com/bhupendra-bhudia/procedural-badlands/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/bhudiaxyz/procedural-badlands/blob/master/LICENSE)
  *
  * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
  */
@@ -17396,7 +17396,7 @@ module.exports = function (regl, screenRes, hmapRes, skyRes) {
 /*!
  * Procedural Badlands - Procedurally generated terrain.
  *
- * Licensed under MIT (https://github.com/bhupendra-bhudia/procedural-badlands/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/bhudiaxyz/procedural-badlands/blob/master/LICENSE)
  *
  * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
  */
@@ -17494,7 +17494,7 @@ function handleError(e, url, line) {
 /*!
  * Procedural Badlands - Procedurally generated terrain.
  *
- * Licensed under MIT (https://github.com/bhupendra-bhudia/procedural-badlands/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/bhudiaxyz/procedural-badlands/blob/master/LICENSE)
  *
  * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
  */
