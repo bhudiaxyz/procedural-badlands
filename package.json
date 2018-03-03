@@ -23,11 +23,7 @@
     "glsl",
     "computer"
   ],
-  "author": {
-    "name": "Bhupendra Bhudia",
-    "email": "bhupendra@bhudia.xyz",
-    "url": "https://github.com/bhudiaxyz"
-  },
+  "author": "Bhupendra Bhudia",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bhudiaxyz/procedural-badlands/issues"
