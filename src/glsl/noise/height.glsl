@@ -1,4 +1,3 @@
-
 #pragma glslify: cursive_noise = require(./cursive.glsl)
 #pragma glslify: perlin2D_normal = require(./perlin_normal.glsl)
 

@@ -60,6 +60,7 @@
         s1 = s2;
         return s2 = t - (c = t | 0);
       };
+      random.next = random;
       random.uint32 = function() {
         return random() * 0x100000000; // 2^32
       };
@@ -1213,6 +1214,7 @@ function render() {
   status.style.display = 'block';
   status.style.lineHeight = window.innerHeight + 'px';
   renderer.render(regl, {
+    random: random,
     callback: updateStatus,
     canvas: canvas,
     fov: random() * 50 + 25,
@@ -1284,6 +1286,7 @@ let render = (() => {
     const fog = params.fog;
     const groundFog = params.groundFog;
     const groundFogAlt = params.groundFogAlt;
+    random = params.random;
 
     statusCallback('Compiling shaders...');
     yield display();
@@ -1529,7 +1532,7 @@ const vec3 = require('gl-matrix').vec3;
 const createOrUpdateFramebuffers = require('./framebuffers');
 const createCommands = require('./commands');
 
-let cmd, tNoise, tAOSampling, chunkMesh, progressiveCmd;
+let cmd, tNoise, tAOSampling, chunkMesh, progressiveCmd, random;
 
 class ProgressiveRenderer {
   constructor(command, context, width, height) {
@@ -1563,7 +1566,7 @@ function generateNoiseTexture(regl, size) {
   let l = size * size * 2;
   let array = new Float32Array(l);
   for (let i = 0; i < l; i++) {
-    let r = Math.random() * Math.PI * 2.0;
+    let r = random() * Math.PI * 2.0;
     array[i * 2 + 0] = Math.cos(r);
     array[i * 2 + 1] = Math.sin(r);
   }
@@ -1584,8 +1587,8 @@ function generateAOSamplingTexture(regl, size, rate) {
   let array = new Float32Array(l);
   for (let i = 0; i < l; i++) {
     let len = 1.0 * Math.log(1 - Math.random()) / -rate;
-    let r = Math.random() * 2.0 * Math.PI;
-    let z = Math.random() * 2.0 - 1.0;
+    let r = random() * 2.0 * Math.PI;
+    let z = random() * 2.0 - 1.0;
     let zScale = Math.sqrt(1.0 - z * z) * len;
     array[i * 3 + 0] = Math.cos(r) * zScale;
     array[i * 3 + 1] = Math.sin(r) * zScale;

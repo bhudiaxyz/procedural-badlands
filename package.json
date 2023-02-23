@@ -34,7 +34,9 @@
     "glslify": "^6.1.0",
     "graceful-fs": "^4.2.4",
     "regl": "^1.7.0",
-    "sprintf": "^0.1.5"
+    "sprintf": "^0.1.5",
+    "random-lorem": "^1.0.4",
+    "seedrandom": "^2.4.3"
   },
   "devDependencies": {
     "browserify": "^15.2.0",

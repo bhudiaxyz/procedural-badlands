@@ -13,8 +13,8 @@ varying vec3 vPos;
 
 
 void main() {
-  vec4 p = model * vec4(position, 1);
-  p.y = heightmap(p.xz, scale, height, tNoise, tNoiseSize);
-  gl_Position = projection * view * p;
-  vPos = p.xyz;
+    vec4 p = model * vec4(position, 1);
+    p.y = heightmap(p.xz, scale, height, tNoise, tNoiseSize);
+    gl_Position = projection * view * p;
+    vPos = p.xyz;
 }

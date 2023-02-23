@@ -15,16 +15,18 @@ const vec3 = require('gl-matrix').vec3;
 const createOrUpdateFramebuffers = require('./framebuffers');
 const createCommands = require('./commands');
 
-let cmd, tNoise, tAOSampling, chunkMesh, progressiveCmd;
+let cmd, tNoise, tAOSampling, chunkMesh, progressiveCmd, random;
 
 async function render(regl, params) {
-  const statusCallback = params.callback || function() {};
+  const statusCallback = params.callback || function () {
+  };
   const canvas = params.canvas;
-  const fov = params.fov/360 * Math.PI * 2.0;
+  const fov = params.fov / 360 * Math.PI * 2.0;
   const sunDir = tod2sundir(params.tod);
   const fog = params.fog;
   const groundFog = params.groundFog;
   const groundFogAlt = params.groundFogAlt;
+  random = params.random;
 
   statusCallback('Compiling shaders...');
   await display();
@@ -47,7 +49,7 @@ async function render(regl, params) {
   const scale = 1.0;
   const tNoiseSize = 256;
   const tAOSamplingSize = 128;
-  const tAOSamplingRate = 1/100;
+  const tAOSamplingRate = 1 / 100;
 
   statusCallback('Creating AO sampling vectors...');
   await display();
@@ -75,9 +77,9 @@ async function render(regl, params) {
   });
 
   const campos = [0, terrainHeight + params.alt, 0];
-  const dirrad = params.dir/360 * Math.PI * 2;
-  const view  = mat4.lookAt([], campos, [Math.cos(dirrad), campos[1], Math.sin(dirrad)], vec3.normalize([], [0, 1, 0]));
-  const proj  = mat4.perspective([], fov, res.x/res.y, 1, 65536);
+  const dirrad = params.dir / 360 * Math.PI * 2;
+  const view = mat4.lookAt([], campos, [Math.cos(dirrad), campos[1], Math.sin(dirrad)], vec3.normalize([], [0, 1, 0]));
+  const proj = mat4.perspective([], fov, res.x / res.y, 1, 65536);
 
   statusCallback('Generating chunk mesh...');
   await display();
@@ -135,9 +137,9 @@ async function render(regl, params) {
 
   let visibleChunks = [];
   for (let z = 0; z < chunks; z++) {
-    let cz = z - chunks/2;
+    let cz = z - chunks / 2;
     for (let x = 0; x < chunks; x++) {
-      let cx = x - chunks/2;
+      let cx = x - chunks / 2;
       visibleChunks.push({
         x: cx * chunkSize,
         z: cz * chunkSize
@@ -161,9 +163,9 @@ async function render(regl, params) {
     renderCount++;
     totalCount++;
     if (renderCount === renderCountTarget) {
-      statusCallback('Calculating terrain positions', totalCount/visibleChunks.length);
+      statusCallback('Calculating terrain positions', totalCount / visibleChunks.length);
       await display();
-      if (performance.now() - tLast >= 1000/50) {
+      if (performance.now() - tLast >= 1000 / 50) {
         renderCountTarget = Math.max(1, renderCountTarget - 1);
       } else {
         renderCountTarget = renderCountTarget * 2;
@@ -186,19 +188,19 @@ async function render(regl, params) {
 
   for (let i = 0; i < 6; i++) {
     let cam = [
-      {target: [1, 0, 0],  up: [0, -1, 0]},
+      {target: [1, 0, 0], up: [0, -1, 0]},
       {target: [-1, 0, 0], up: [0, -1, 0]},
-      {target: [0, 1, 0],  up: [0, 0, 1]},
+      {target: [0, 1, 0], up: [0, 0, 1]},
       {target: [0, -1, 0], up: [0, 0, -1]},
-      {target: [0, 0, 1],  up: [0, -1, 0]},
+      {target: [0, 0, 1], up: [0, -1, 0]},
       {target: [0, 0, -1], up: [0, -1, 0]}
     ][i];
-    let _view = mat4.lookAt([], [0,0,0], cam.target, cam.up);
-    let _proj = mat4.perspective([], Math.PI/2, 1, 0.01, 100);
+    let _view = mat4.lookAt([], [0, 0, 0], cam.target, cam.up);
+    let _proj = mat4.perspective([], Math.PI / 2, 1, 0.01, 100);
     let _pv = mat4.multiply([], _proj, _view);
     let _invpv = mat4.invert([], _pv);
     cmd.sky(ctx({_invpv: _invpv, destination: fb.sky.faces[i]}));
-    statusCallback('Generating sky cubemap', i/5);
+    statusCallback('Generating sky cubemap', i / 5);
     await display();
   }
 
@@ -278,7 +280,7 @@ class ProgressiveRenderer {
 
   render() {
     if (this.last !== undefined) {
-      if (performance.now() - this.last > 1000/10) {
+      if (performance.now() - this.last > 1000 / 10) {
         this.yStep = Math.max(1, this.yStep - 1);
       } else {
         this.yStep = this.yStep * 2;
@@ -286,10 +288,10 @@ class ProgressiveRenderer {
     }
     this.last = performance.now();
     this.cmd(Object.assign(this.ctx, {
-      scissorbox: { x: 0, y: this.y, width: this.w, height: this.yStep }
+      scissorbox: {x: 0, y: this.y, width: this.w, height: this.yStep}
     }));
     this.y = this.y + this.yStep;
-    return Math.min(1, this.y/this.h);
+    return Math.min(1, this.y / this.h);
   }
 }
 
@@ -299,7 +301,7 @@ function generateNoiseTexture(regl, size) {
   let l = size * size * 2;
   let array = new Float32Array(l);
   for (let i = 0; i < l; i++) {
-    let r = Math.random() * Math.PI * 2.0;
+    let r = random() * Math.PI * 2.0;
     array[i * 2 + 0] = Math.cos(r);
     array[i * 2 + 1] = Math.sin(r);
   }
@@ -320,10 +322,10 @@ function generateAOSamplingTexture(regl, size, rate) {
   let l = size * 3;
   let array = new Float32Array(l);
   for (let i = 0; i < l; i++) {
-    let len = 1.0 * Math.log(1 - Math.random())/-rate;
-    let r = Math.random() * 2.0 * Math.PI;
-    let z = (Math.random() * 2.0) - 1.0;
-    let zScale = Math.sqrt(1.0-z*z) * len;
+    let len = 1.0 * Math.log(1 - Math.random()) / -rate;
+    let r = random() * 2.0 * Math.PI;
+    let z = (random() * 2.0) - 1.0;
+    let zScale = Math.sqrt(1.0 - z * z) * len;
     array[i * 3 + 0] = Math.cos(r) * zScale;
     array[i * 3 + 1] = Math.sin(r) * zScale;
     array[i * 3 + 2] = z * len;
@@ -343,7 +345,7 @@ function generateAOSamplingTexture(regl, size, rate) {
 function generateChunkMeshIndexed(size, terrainResolution) {
   const rp1 = terrainResolution + 1;
   let positions = [];
-  let step = size/terrainResolution;
+  let step = size / terrainResolution;
   for (let i = 0; i < rp1; i++) {
     let x = i * step;
     for (let j = 0; j < rp1; j++) {
@@ -369,14 +371,14 @@ function generateChunkMeshIndexed(size, terrainResolution) {
 
 function display() {
   return new Promise(resolve => {
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       resolve();
     });
   });
 }
 
 function tod2sundir(tod) {
-  let phi = tod/24 * Math.PI * 2 - Math.PI/2;
+  let phi = tod / 24 * Math.PI * 2 - Math.PI / 2;
   return vec3.normalize([], [
     1,
     Math.sin(phi),
