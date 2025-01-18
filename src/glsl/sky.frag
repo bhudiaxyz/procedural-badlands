@@ -23,6 +23,7 @@ void main() {
         1.2e3, // Mie scale height
         0.758// Mie preferred scattering direction
     );
+
     // super duper hacky approximation of sun intensity & radius
     float d = clamp(dot(r, sunDir), 0.0, 1.0);
     float d2 = clamp(dot(vec3(0, 1, 0), sunDir), 0.0, 1.0);

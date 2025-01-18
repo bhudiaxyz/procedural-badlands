@@ -79,9 +79,9 @@ function updateUrl(seed) {
 function initSeed(seed) {
   seedString = seed;
   window.seedString = seedString;
-  window.rng = seedrandom(seedString);
-
-  random = new Alea(seedString);
+  // window.rng = seedrandom(seedString);
+  // random = window.rng;
+  window.rng = random = new Alea(seedString);
   updateUrl(seed)
 }
 
@@ -153,12 +153,12 @@ function render() {
     tod: 6 + random(),
     colors: {
       high: {
-        steep: [[0.45 - random() * 0.35, 0.25 - random() * 0.15, 0], [0.45 - random() * 0.35, 0.25 - random() * 0.15, 0]],
-        flat: [[1, 1, 1], [1, 1, 1]]
+        steep: [[0.41 - random() * 0.35, 0.25 - random() * 0.15, 0], [0.41 - random() * 0.35, 0.25 - random() * 0.15, 0]],
+        flat: [[0.8, 0.9, 1], [1, 1, 1]]
       },
       low: {
         steep: [[0.5 - random() * 0.25, 0.25 - random() * 0.25, 0], [0.5 - random() * 0.25, 0.25 - random() * 0.25, 0]],
-        flat: [[1, 1, 1], [1, 1, 1]]
+        flat: [[0.7, 0.8, 1], [1, 1, 1]]
       }
     },
     fog: random() * 0.0001,

@@ -328,7 +328,7 @@ function generateAOSamplingTexture(regl, size, rate) {
     let zScale = Math.sqrt(1.0 - z * z) * len;
     array[i * 3 + 0] = Math.cos(r) * zScale;
     array[i * 3 + 1] = Math.sin(r) * zScale;
-    array[i * 3 + 2] = z * len;
+    array[i * 3 + 2] = Math.tan(r) * zScale; // z * len;
   }
   tAOSampling({
     format: 'rgb',

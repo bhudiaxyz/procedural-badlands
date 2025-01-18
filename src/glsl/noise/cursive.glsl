@@ -12,6 +12,7 @@ float cursive_noise(vec2 p, float scale, sampler2D tNoise, float tNoiseSize) {
         );
         gamma *= sigma;
     }
+
     return perlin2D_normal(p * gamma + displace, tNoise, tNoiseSize);
 }
 

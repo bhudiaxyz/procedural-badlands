@@ -32,6 +32,7 @@ void main() {
     const int steps = 256;
     const float scatteringFactor = 0.01;
     const float extinctionFactor = 0.05;
+
     float dist;
     vec3 rd;
     if (pos.a == 0.0) {
@@ -42,6 +43,7 @@ void main() {
         dist = distance(pos.xyz, campos);
         rd = normalize(pos.xyz - campos);
     }
+
     float dt = dist/float(steps - 1);
     float t = 0.0;
     for (int i = 0; i < steps; i++) {
@@ -56,5 +58,6 @@ void main() {
         scattering += extinction * stepScattering;
         t += dt;
     }
+
     gl_FragColor = vec4(scattering, extinction);
 }

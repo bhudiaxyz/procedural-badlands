@@ -7,6 +7,7 @@ float height(vec2 p, float scale, float height, sampler2D tNoise, float tNoiseSi
     float h = cursive_noise(p, scale, tNoise, tNoiseSize) * height * 1.0;
     h += pow(perlin2D_normal(p * 0.25, tNoise, tNoiseSize) + 0.25, 4.0) * height * 3.0;
     h = mix(perlin2D_normal(p * 0.4, tNoise, tNoiseSize) * height * 1.0, h, h/(height*4.0));
+
     return h;
 }
 

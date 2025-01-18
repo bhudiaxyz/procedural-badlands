@@ -11,6 +11,7 @@ varying vec2 uv;
 void main() {
     vec2 p = uv * 2.0 - 1.0;
     if (origin) p = vec2(0);
+
     float h = heightmap(p * dist, scale, height, tNoise, tNoiseSize);
     gl_FragColor = vec4(h);
 }

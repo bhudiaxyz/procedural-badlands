@@ -28,6 +28,7 @@ void main() {
     vec3 p = src.xyz;
     p.y = noise(p.xz);
     float angle = clamp(dot(n, sunDir), 0.0, 1.0);
+
     vec3 sunlight = textureCube(tSky, sunDir).rgb * light(p + n * 64.0) * angle;
     gl_FragColor = vec4(sunlight, 1);
 }

@@ -14,6 +14,7 @@ void main() {
     vec3 n = texture2D(tNormal, uv).xyz;
     vec3 p = src.xyz;
     p.y = heightmap(p.xz, scale, height, tNoise, tNoiseSize);
+
     vec3 ambient = vec3(0);
     float occlusion = 0.0;
     for (int i = 0; i < 65536; i++) {
@@ -29,6 +30,7 @@ void main() {
         r.y = abs(r.y);
         ambient += textureCube(tSky, normalize(r)).rgb;
     }
+
     ambient = ambient / tAOSamplingSize;
     float ao = 1.0 - occlusion / tAOSamplingSize;
     gl_FragColor = vec4(ambient, ao);
