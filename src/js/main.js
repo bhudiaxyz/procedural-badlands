@@ -1,20 +1,14 @@
 'use strict';
 
-/*!
- * Procedural Badlands - Procedurally generated terrain.
- *
- * Licensed under MIT (https://github.com/bhudiaxyz/procedural-badlands/blob/master/LICENSE)
- *
- * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
- */
-
-const sprintf = require('sprintf').sprintf;
-const reglib = require('regl');
-const saveAs = require('filesaver.js').saveAs;
-const renderer = require('./render.js');
-const seedrandom = require('seedrandom');
-const randomLorem = require('random-lorem');
-var Alea = require('alea');
+import '../scss/main.scss';
+import '@fontsource/material-icons';
+import '@fontsource-variable/inter';
+import { saveAs } from 'file-saver';
+import reglib from 'regl';
+import seedrandom from 'seedrandom';
+import randomLorem from 'random-lorem';
+import Alea from 'alea';
+import { render as rendererRender } from './render.js';
 
 const status = document.getElementById('status');
 const next = document.getElementById('next');
@@ -79,10 +73,8 @@ function updateUrl(seed) {
 function initSeed(seed) {
   seedString = seed;
   window.seedString = seedString;
-  // window.rng = seedrandom(seedString);
-  // random = window.rng;
   window.rng = random = new Alea(seedString);
-  updateUrl(seed)
+  updateUrl(seed);
 }
 
 
@@ -100,7 +92,7 @@ function generateNewSeed() {
   let newSeedString = "";
   for (let i = 0; i < wordCount; ++i) {
     const randWord = randomLorem({min: 2, max: 8});
-    const wordCapitalized = randWord.charAt(0).toUpperCase() + randWord.slice(1)
+    const wordCapitalized = randWord.charAt(0).toUpperCase() + randWord.slice(1);
     newSeedString += wordCapitalized;
     if (i < wordCount - 1) {
       newSeedString += "-";
@@ -136,14 +128,14 @@ function main() {
 }
 
 function randomizeRender() {
-  randomizeSeed()
-  render()
+  randomizeSeed();
+  render();
 }
 
 function render() {
   status.style.display = 'block';
   status.style.lineHeight = window.innerHeight + 'px';
-  renderer.render(regl, {
+  rendererRender(regl, {
     random: random,
     callback: updateStatus,
     canvas: canvas,
@@ -170,7 +162,7 @@ function render() {
 
 function updateStatus(task, fraction, done) {
   if (fraction !== undefined) {
-    status.innerText = sprintf('%s: %d%%', task, Math.round(fraction * 100));
+    status.innerText = `${task}: ${Math.round(fraction * 100)}%`;
   } else {
     status.innerText = task;
   }
@@ -188,14 +180,13 @@ function reflow() {
 
 function downloadImage() {
   canvas.toBlob(function (blob) {
-    let filename = sprintf('procedural-badlands-%d.png', Math.round(random() * 10000));
-    saveAs(blob, filename);
+    saveAs(blob, `procedural-badlands-${Math.round(random() * 10000)}.png`);
   });
 }
 
 
-function handleError(e, url, line) {
+function handleError(e) {
   status.style.display = 'block';
   status.style.lineHeight = '128px';
-  status.innerHTML = `<div>Sorry, couldn't render the badlands because of the following error:</div> <div style='color:red'>${e.message}</div>`
+  status.innerHTML = `<div>Sorry, couldn't render the badlands because of the following error:</div> <div style='color:red'>${e.message}</div>`;
 }

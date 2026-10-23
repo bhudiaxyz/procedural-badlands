@@ -1,16 +1,8 @@
 'use strict';
 
-/*!
- * Procedural Badlands - Procedurally generated terrain.
- *
- * Licensed under MIT (https://github.com/bhudiaxyz/procedural-badlands/blob/master/LICENSE)
- *
- * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
- */
-
 const fb = {};
 
-module.exports = function (regl, screenRes, hmapRes, skyRes) {
+export default function createOrUpdateFramebuffers(regl, screenRes, hmapRes, skyRes) {
 
   fb.position = fb.position || regl.framebuffer();
   fb.height = fb.height || regl.framebuffer();
@@ -106,5 +98,4 @@ module.exports = function (regl, screenRes, hmapRes, skyRes) {
   });
 
   return fb;
-
-};
+}

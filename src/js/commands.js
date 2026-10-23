@@ -1,22 +1,26 @@
 'use strict';
 
-/*!
- * Procedural Badlands - Procedurally generated terrain.
- *
- * Licensed under MIT (https://github.com/bhudiaxyz/procedural-badlands/blob/master/LICENSE)
- *
- * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
- */
+import quadVert from '../glsl/quad.vert';
+import copyFrag from '../glsl/copy.frag';
+import positionVert from '../glsl/position.vert';
+import positionFrag from '../glsl/position.frag';
+import heightFrag from '../glsl/height.frag';
+import skyFrag from '../glsl/sky.frag';
+import shadowFrag from '../glsl/shadow.frag';
+import normalFrag from '../glsl/normal.frag';
+import pmediaFrag from '../glsl/pmedia.frag';
+import diffuseFrag from '../glsl/diffuse.frag';
+import aoFrag from '../glsl/ao.frag';
+import directFrag from '../glsl/direct.frag';
+import composeFrag from '../glsl/compose.frag';
 
-const glslify = require('glslify');
-
-module.exports = function (regl) {
+export default function createCommands(regl) {
 
   const cmd = {};
 
   cmd.copy = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/copy.frag'),
+    vert: quadVert,
+    frag: copyFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {tSource: regl.prop('source')},
@@ -26,8 +30,8 @@ module.exports = function (regl) {
   });
 
   cmd.position = regl({
-    vert: glslify('../glsl/position.vert'),
-    frag: glslify('../glsl/position.frag'),
+    vert: positionVert,
+    frag: positionFrag,
     attributes: {
       position: regl.prop('position')
     },
@@ -51,8 +55,8 @@ module.exports = function (regl) {
   });
 
   cmd.height = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/height.frag'),
+    vert: quadVert,
+    frag: heightFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {
@@ -69,8 +73,8 @@ module.exports = function (regl) {
   });
 
   cmd.sky = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/sky.frag'),
+    vert: quadVert,
+    frag: skyFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {
@@ -83,8 +87,8 @@ module.exports = function (regl) {
   });
 
   cmd.shadow = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/shadow.frag'),
+    vert: quadVert,
+    frag: shadowFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {
@@ -99,8 +103,8 @@ module.exports = function (regl) {
   });
 
   cmd.normal = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/normal.frag'),
+    vert: quadVert,
+    frag: normalFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {
@@ -117,8 +121,8 @@ module.exports = function (regl) {
   });
 
   cmd.media = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/pmedia.frag'),
+    vert: quadVert,
+    frag: pmediaFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {
@@ -140,8 +144,8 @@ module.exports = function (regl) {
   });
 
   cmd.diffuse = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/diffuse.frag'),
+    vert: quadVert,
+    frag: diffuseFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {
@@ -164,8 +168,8 @@ module.exports = function (regl) {
   });
 
   cmd.ao = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/ao.frag'),
+    vert: quadVert,
+    frag: aoFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {
@@ -186,8 +190,8 @@ module.exports = function (regl) {
   });
 
   cmd.direct = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/direct.frag'),
+    vert: quadVert,
+    frag: directFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {
@@ -205,8 +209,8 @@ module.exports = function (regl) {
   });
 
   cmd.compose = regl({
-    vert: glslify('../glsl/quad.vert'),
-    frag: glslify('../glsl/compose.frag'),
+    vert: quadVert,
+    frag: composeFrag,
     attributes: {position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]},
     count: 6,
     uniforms: {
@@ -225,5 +229,4 @@ module.exports = function (regl) {
   });
 
   return cmd;
-
-};
+}

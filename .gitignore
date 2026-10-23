@@ -1,12 +1,26 @@
-# NodeJS
-node_modules/
-bower_components/
+# Node.js related files
+node_modules
+dist
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Junk
-yarn.lock
+# AI tooling files
+.cursorrules
+.cursor
+.claude
+.codex
+
+# OS generated files
+.DS_Store
+.Trashes
+Thumbs.db
 *.log
 
-# editor
+# Editor files
+*.code-workspace
 .vscode/
 .idea/
 *.iml
@@ -15,11 +29,13 @@ yarn.lock
 target/
 out/
 build/
-dist/
-
-# OSX
-.DS_Store
 
 # linters
 .eslintrc.json
 .sass-lint.yml
+.husky/
+
+# Build
+output/*.png
+output/*.jpg
+video/

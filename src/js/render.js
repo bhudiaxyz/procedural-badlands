@@ -1,25 +1,13 @@
 'use strict';
 
-/*!
- * Procedural Badlands - Procedurally generated terrain.
- *
- * Licensed under MIT (https://github.com/bhudiaxyz/procedural-badlands/blob/master/LICENSE)
- *
- * Based on works of Rye Terrell (aka wwwtyro): https://github.com/wwwtyro/badlands
- */
-
-
-const mat4 = require('gl-matrix').mat4;
-const vec3 = require('gl-matrix').vec3;
-
-const createOrUpdateFramebuffers = require('./framebuffers');
-const createCommands = require('./commands');
+import { mat4, vec3 } from 'gl-matrix';
+import createOrUpdateFramebuffers from './framebuffers';
+import createCommands from './commands';
 
 let cmd, tNoise, tAOSampling, chunkMesh, progressiveCmd, random;
 
-async function render(regl, params) {
-  const statusCallback = params.callback || function () {
-  };
+export async function render(regl, params) {
+  const statusCallback = params.callback || function () {};
   const canvas = params.canvas;
   const fov = params.fov / 360 * Math.PI * 2.0;
   const sunDir = tod2sundir(params.tod);
@@ -264,7 +252,6 @@ async function render(regl, params) {
   cmd.copy(ctx({source: fb.compose, destination: null}));
   statusCallback(null, null, true);
   await display();
-
 }
 
 
@@ -328,7 +315,7 @@ function generateAOSamplingTexture(regl, size, rate) {
     let zScale = Math.sqrt(1.0 - z * z) * len;
     array[i * 3 + 0] = Math.cos(r) * zScale;
     array[i * 3 + 1] = Math.sin(r) * zScale;
-    array[i * 3 + 2] = Math.tan(r) * zScale; // z * len;
+    array[i * 3 + 2] = Math.tan(r) * zScale;
   }
   tAOSampling({
     format: 'rgb',
@@ -385,5 +372,3 @@ function tod2sundir(tod) {
     -Math.cos(phi)
   ]);
 }
-
-module.exports.render = render;
